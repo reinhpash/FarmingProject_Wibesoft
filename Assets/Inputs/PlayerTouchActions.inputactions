@@ -1,0 +1,86 @@
+{
+    "name": "PlayerTouchActions",
+    "maps": [
+        {
+            "name": "Touch",
+            "id": "2efd5bb6-74a0-4bd5-985f-3f982dc118f7",
+            "actions": [
+                {
+                    "name": "TouchPosition",
+                    "type": "Value",
+                    "id": "bd424cd1-5e86-4b20-858c-b354981cf0f7",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "TouchPress",
+                    "type": "Button",
+                    "id": "d6b58c82-5c0b-4011-a98b-fdcce7503b26",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "HoldPress",
+                    "type": "Button",
+                    "id": "f838b8fb-3ad4-4993-9a95-8df165f96235",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold(duration=1)",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a98e4668-6a49-43ef-a15e-7b79b7c99447",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "TouchPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0bb36a10-e808-4990-95f1-f7c0bf4915b5",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "TouchPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b429e1eb-85b1-40ab-af6c-a942c807a00d",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "Hold(duration=1)",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "HoldPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Touch",
+            "bindingGroup": "Touch",
+            "devices": [
+                {
+                    "devicePath": "<Touchscreen>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

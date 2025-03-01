@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3393848176094998627
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 1eb9800696136e9448656ad38f4e574b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1eb9800696136e9448656ad38f4e574b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1eb9800696136e9448656ad38f4e574b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1eb9800696136e9448656ad38f4e574b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1eb9800696136e9448656ad38f4e574b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1eb9800696136e9448656ad38f4e574b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1eb9800696136e9448656ad38f4e574b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1eb9800696136e9448656ad38f4e574b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1eb9800696136e9448656ad38f4e574b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1eb9800696136e9448656ad38f4e574b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 1eb9800696136e9448656ad38f4e574b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fa6c45465cde56c4495f6d9109c80326, type: 2}
+    - target: {fileID: 919132149155446097, guid: 1eb9800696136e9448656ad38f4e574b, type: 3}
+      propertyPath: m_Name
+      value: Farm_Crop_Carrot_Step_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1eb9800696136e9448656ad38f4e574b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1eb9800696136e9448656ad38f4e574b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8601110491435023273}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1eb9800696136e9448656ad38f4e574b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8202782201806688528}
+  m_SourcePrefab: {fileID: 100100000, guid: 1eb9800696136e9448656ad38f4e574b, type: 3}
+--- !u!1 &2582875128571546930 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1eb9800696136e9448656ad38f4e574b, type: 3}
+  m_PrefabInstance: {fileID: 3393848176094998627}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8601110491435023273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2582875128571546930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61298354c16b64479ffc8a248adeea4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HarvestedEffect: {fileID: 3113094006977580287, guid: e4d906fb9cfca454f98d37733713f6e1, type: 3}
+  levelMeshes:
+  - {fileID: 2002715036992664983, guid: 1eb9800696136e9448656ad38f4e574b, type: 3}
+  - {fileID: 2683140368571956053, guid: fd823b02d4dab724085a0d07af8bca70, type: 3}
+  - {fileID: -8808425536343626755, guid: ede85317fc77cd540835fa5a9e4e7938, type: 3}
+  cropData: {fileID: 11400000, guid: 8bf53a84be3bf444d88c5283e651d88b, type: 2}
+  currentHarvestTime: 0
+  harvestTickTime: 10
+  maxHarvestTickAmount: 3
+  currentTick: 1
+--- !u!65 &8202782201806688528
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2582875128571546930}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5449297, y: 0.7438116, z: 1.4770465}
+  m_Center: {x: 0.012874603, y: 0.084209844, z: -0.030683309}
