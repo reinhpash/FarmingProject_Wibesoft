@@ -11,7 +11,7 @@ namespace Aeterponis.Grid
         {
             gridSystem = new GridSystem(20,20,2f);
 
-            gridSystem.CreateDebugObjects(gridDebugObjectPrefab);
+            //gridSystem.CreateDebugObjects(gridDebugObjectPrefab);
         }
 
         public GridPosition GetGridPositon(Vector3 touchPosition)
