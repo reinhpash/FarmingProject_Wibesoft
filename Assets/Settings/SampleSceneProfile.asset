@@ -88,11 +88,11 @@ MonoBehaviour:
   m_Name: SampleSceneProfile
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 849379129802519247}
   - {fileID: -7893295128165547882}
   - {fileID: 7391319092446245454}
   - {fileID: -3357603926938260329}
---- !u!114 &849379129802519247
+  - {fileID: 3232234770247172073}
+--- !u!114 &3232234770247172073
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,20 +118,20 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   detectPaperWhite:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0
   paperWhite:
-    m_OverrideState: 1
-    m_Value: 234
+    m_OverrideState: 0
+    m_Value: 300
   detectBrightnessLimits:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   minNits:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0.005
   maxNits:
-    m_OverrideState: 1
-    m_Value: 647
+    m_OverrideState: 0
+    m_Value: 1000
 --- !u!114 &7391319092446245454
 MonoBehaviour:
   m_ObjectHideFlags: 3
