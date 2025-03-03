@@ -25,6 +25,8 @@ Yazdığım kodların önemli kısımlarında genelde actionlar kullanıldı bun
 
 Hayday oyununda ki gibi bina ve ekin ekme işlemleri ui'dan drag and drop edilerek gerçekleştirildi.
 
+Hayday Oyunundaki gibi binaların üzerine gelip basılı tutulduğunda binaları yeniden yerleştirebiliyoruz
+
 ## # Ekin Sistemi
 Tüm ekin ekme, hasat etme gibi işlemler CropManager isimli managerdan gerçekleşmekte.
 Ekinlerin temel sınıfı olan Harvest sınıfında ilgili hasatın datalarını kontrol etmek, tamamlandığını kontrol etmek ve hasat etme metodunu barındırıyor.
