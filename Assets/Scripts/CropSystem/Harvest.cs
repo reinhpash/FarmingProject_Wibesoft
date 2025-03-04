@@ -5,7 +5,7 @@ using UnityEngine;
 public class Harvest : MonoBehaviour
 {
     MeshFilter meshFilter;
-    public Action OnCropHarvested;
+    public Action OnCropHarvested; //Public event for harvesting 
     public GameObject HarvestedEffect;
     public List<Mesh> levelMeshes = new List<Mesh>();
     public CropDataSO cropData;
@@ -28,17 +28,17 @@ public class Harvest : MonoBehaviour
 
         if (currentHarvestTime >= harvestTickTime * currentTick)
         {
-            currentTick++;
-            meshFilter.mesh = levelMeshes[currentTick - 1];
+            currentTick++; //Update level of crop
+            meshFilter.mesh = levelMeshes[currentTick - 1]; //Growth Animation
         }
     }
 
-    public bool IsDone()
+    public bool IsDone() //Check is crop life cycle done
     {
         return currentTick >= maxHarvestTickAmount;
     }
 
-    public void DoHarvest()
+    public void DoHarvest() //Crop Harvesting
     {
         if (!isHarvested)
         {
@@ -53,12 +53,12 @@ public class Harvest : MonoBehaviour
         
     }
 
-    public (float, int) GetHarvestData()
+    public (float, int) GetHarvestData() // Harvest data Getter for Save/Placement system
     {
         return (currentHarvestTime, currentTick);
     }
 
-    public void SetHarvestData(float _currentHarvestTime, int _currentTick)
+    public void SetHarvestData(float _currentHarvestTime, int _currentTick) // Load Harvest Data for Save/Placement system
     {
         currentHarvestTime = _currentHarvestTime;
         currentTick = _currentTick;

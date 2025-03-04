@@ -9,10 +9,12 @@ using UnityEngine.UI;
 
 public class BuildingManager : MonoBehaviour
 {
+    //PUBLIC
     public static BuildingManager Instance;
     public PlacableObjectSO.Direction currentDirection = PlacableObjectSO.Direction.Down;
     public PlacedObject selectedPlacedObject;
 
+    //PRIVATE
     private Transform ghostObject;
     private Camera mainCamera;
     private bool isInBuildingState = false;
@@ -25,25 +27,32 @@ public class BuildingManager : MonoBehaviour
     private float replaceHarvestTime;
     private int replaceHarvestTick;
 
+
+    //SERIALIZEFIELD
     [SerializeField] TouchManager touchManager;
     [SerializeField] GameGrid targetGrid;
     [SerializeField] private LayerMask mousePlaneLayerMask;
     [SerializeField] private PlacableObjectSO selectedPlacable;
     [SerializeField] private Material ghostMaterial;
+
+    //PROPS
     public bool IsInBuildingState { get => isInBuildingState; set => isInBuildingState = value; }
     public PlacableObjectSO SelectedPlacable { get => selectedPlacable; set => selectedPlacable = value; }
 
     private void Awake()
     {
+        //SINGLETON
         if (Instance != null)
             Destroy(this);
         else
             Instance = this;
 
 
+        //Caching for optimization
         mainCamera = Camera.main;
         ghostMaterialInstance = Instantiate(ghostMaterial);
 
+        //Subscribe to events
         touchManager.OnScreenTouched += PlayerTouchedTheScreen;
         touchManager.OnScreenToucheReleased += PlayerToucheReleased;
         touchManager.OnHoldHappend += PlayerHoldHappend;
@@ -61,15 +70,16 @@ public class BuildingManager : MonoBehaviour
     {
         if (IsInBuildingState)
         {
-            targetGrid.GetGridWorldPosition(GetTouchWorldPosition(), out float x, out float z);
+            //Get the Grid object where player tries to put the building
+            targetGrid.GetGridWorldPosition(GetTouchWorldPosition(), out float x, out float z); //Get touch world grid position
             GridPosition gp = targetGrid.GetGridPositon(GetTouchWorldPosition());
-
             GridObject gridObject = targetGrid.GetGridObject(gp.x, gp.z);
 
+            //Get Building Occupied Areas
             List<Vector2Int> occupiedAreas = SelectedPlacable.GetGridPositionList(new Vector2Int(gp.x,
                                                                                                 gp.z),
                                                                                                 currentDirection);
-
+            //Check can Player build here
             bool canBuild = true;
             foreach (Vector2Int gridPosition in occupiedAreas)
             {
@@ -80,6 +90,7 @@ public class BuildingManager : MonoBehaviour
                 }
             }
 
+            //Check Is Player Tries to build on the safe area
             if (IsOverWaterLayer())
             {
                 canBuild = false;
@@ -94,23 +105,30 @@ public class BuildingManager : MonoBehaviour
                     currentDirection,
                     SelectedPlacable);
 
+                //Occupie areas
                 foreach (Vector2Int gridPosition in occupiedAreas)
                 {
+                    Debug.Log(gridPosition + "OCCUPIE");
                     targetGrid.GetGridObject(gridPosition.x, gridPosition.y).SetTransform(_placedObject);
                 }
 
+                //If area has Crops
                 if (replaceHarvestAreaCrop != null)
                 {
+                    //Spawn new Crop
                     Transform _placedHarvest = Instantiate(replaceHarvestAreaCrop.cropData.prefab, placedObjectWorldPosition, Quaternion.identity);
                     _placedObject.GetComponent<HarvestArea>().RegisterHarvest(_placedHarvest.GetComponent<Harvest>());
+                    //Destroy old one
                     Destroy(replaceHarvestAreaCrop.gameObject);
 
+                    //Replace old datas to new crop
                     replaceHarvestAreaCrop = _placedHarvest.GetComponent<Harvest>();
                     replaceHarvestAreaCrop.SetHarvestData(replaceHarvestTime,replaceHarvestTick);
-                    replaceHarvestAreaCrop.transform.position = _placedObject.transform.position + new Vector3(0,1,0);
+                    replaceHarvestAreaCrop.transform.position = _placedObject.transform.position + new Vector3(0,.18f,0);
                     replaceHarvestAreaCrop.transform.parent = _placedObject.transform;
                 }
 
+                //Replace phase done reset the values
                 Destroy(ghostObject.gameObject);
                 replaceHarvestAreaCrop = null;
                 replaceHarvestTime = 0;
@@ -122,7 +140,7 @@ public class BuildingManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Can't build");
+                //Can't build
                 if (isReplacement)
                 {
                     PlacedObject _placedObject = PlacedObject.Create(selectedObjectLastPosition,
@@ -148,10 +166,12 @@ public class BuildingManager : MonoBehaviour
         if (!isInBuildingState)
         {
             GetPlacedObject();
+            //If player touched to placed object
             if (selectedPlacedObject != null)
             {
                 if (!selectedPlacedObject.HoldUI.activeSelf)
                 {
+                    //Enable speacial menu for that object and enter editing state
                     selectedPlacedObject.HoldUI.SetActive(true);
                     isEditingState = true;
                 }
@@ -161,6 +181,7 @@ public class BuildingManager : MonoBehaviour
     }
     public void GetPlacedObject()
     {
+        //Register Placed Building to the SelectedPlacedObject
         GridPosition gp = targetGrid.GetGridPositon(GetTouchWorldPosition());
 
         GridObject gridObject = targetGrid.GetGridObject(gp.x, gp.z);
@@ -175,15 +196,13 @@ public class BuildingManager : MonoBehaviour
 
         selectedPlacedObject = gridObject.GetSettedObject();
     }
-
     private bool ClickedOnUI()
     {
-
+        //Check is Touch on the UI 
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
         eventDataCurrentPosition.position = Input.GetTouch(0).position;
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-        // return results.Count > 0;
         foreach (var item in results)
         {
             if (item.gameObject.CompareTag("UI"))
@@ -201,14 +220,16 @@ public class BuildingManager : MonoBehaviour
 
     public void RemoveBuilding()
     {
-        //GetPlacedObject();
+        //Building Removing system
         if (selectedPlacedObject != null)
         {
             selectedPlacedObject.DestroySelf();
             List<Vector2Int> occupiedAreas = selectedPlacedObject.GetGridPositionList();
             foreach (Vector2Int gridPosition in occupiedAreas)
             {
-                targetGrid.GetGridObject(gridPosition.x, gridPosition.y).ClearTransform();
+                GridObject _gridObject = targetGrid.GetGridObject(gridPosition.x, gridPosition.y);
+                if(_gridObject != null)
+                    _gridObject.ClearTransform();
             }
         }
     }
@@ -224,6 +245,7 @@ public class BuildingManager : MonoBehaviour
     {
         if (selectedPlacedObject != null)
         {
+            //Player touched and hold on the Building start replacement
             selectedPlacedObject.HoldUI.SetActive(false);
             StartReplacement();
         }
@@ -234,6 +256,7 @@ public class BuildingManager : MonoBehaviour
     {
         if (ghostObject != null)
         {
+            //Building Ghost checking system
             targetGrid.GetGridWorldPosition(GetTouchWorldPosition(), out float _x, out float _z);
             ghostObject.transform.position = new Vector3(_x, .1f, _z);
 
@@ -278,8 +301,12 @@ public class BuildingManager : MonoBehaviour
         selectedPlacable = selectedPlacedObject.Data;
         if(selectedPlacedObject.transform.TryGetComponent(out HarvestArea _harvestArea))
         {
-            replaceHarvestAreaCrop = _harvestArea.GetHarvest();
-            (replaceHarvestTime, replaceHarvestTick) = _harvestArea.GetHarvest().GetHarvestData();
+            if (_harvestArea.GetHarvest() != null)
+            {
+                replaceHarvestAreaCrop = _harvestArea.GetHarvest();
+                (replaceHarvestTime, replaceHarvestTick) = _harvestArea.GetHarvest().GetHarvestData();
+
+            }
         }
 
         //Create a new Ghost at location

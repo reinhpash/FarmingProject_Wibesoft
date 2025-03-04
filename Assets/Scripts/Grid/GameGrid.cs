@@ -9,8 +9,9 @@ namespace Aeterponis.Grid
 
         private void Awake()
         {
-            gridSystem = new GridSystem(20,20,2f);
+            gridSystem = new GridSystem(50,50,2f);
 
+            //Debug
             //gridSystem.CreateDebugObjects(gridDebugObjectPrefab);
         }
 
